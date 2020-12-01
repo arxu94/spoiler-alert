@@ -22,10 +22,6 @@ class Api::V1::RecipesController < ApplicationController
   def show
   end
 
-  ### method to scrape the recipes
-  def recipe_scraper
-  end
-
   ### method to delete one recipe based on recipe id
   def destroy
     @recipe.destroy
