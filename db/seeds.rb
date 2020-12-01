@@ -3,5 +3,26 @@
 #
 # Examples:
 #
+require 'faker'
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Food.destroy_all
+User.destroy_all
+
+
+10.times do
+  user = User.create!(
+    nickname: Faker::Name.name,
+    open_id: rand(1..200)
+    )
+
+  food = Food.create!(
+  user: user,
+  name: Faker::Food.vegetables,
+  status: true,
+  shelf_life: rand(1..15),
+  photo: "https://source.unsplash.com/800x400/?groceries,meat,vegetables,fruits",
+  purchase_date: Faker::Date.backward(days: 10)
+    )
+end
