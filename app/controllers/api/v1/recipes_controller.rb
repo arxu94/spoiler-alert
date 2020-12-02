@@ -2,6 +2,8 @@ class Api::V1::RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :destroy]
   skip_before_action :verify_authenticity_token, only: [:create, :destroy]
 
+require 'open-uri'
+
   ### method to save new recipe when user saves one they like
   def create
     @recipe = Recipe.new(recipe_params)
@@ -22,8 +24,33 @@ class Api::V1::RecipesController < ApplicationController
   def show
   end
 
-  ### method to scrape the recipes
-  def recipe_scraper
+  ### method to mirror the recipes, same input for the route, make a request to the API spoonacular, wx request makes a get request to this route
+  def recipe_results
+    @ingredients = params[:search]
+
+    # interpolate the food name into the url link (don't forget the + sign in front)
+    # hardcoded:
+    url = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=+flour,+sugar&number=5&apiKey=8a69fc25f1ca4ccfa484d58fee68b86a"
+    # interpolation:
+    # url = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=#{@ingredients}&number=5&apiKey=8a69fc25f1ca4ccfa484d58fee68b86a"
+
+    response = open(url).read
+    @recipes = JSON.parse(response)
+    # return the result of the spoonacular API
+    render json: { result: @recipes }
+  end
+
+# get detailed recipe based on id
+  def recipe_details
+    @recipe_id = params[:id]
+    # hardcoded:
+    url = "https://api.spoonacular.com/recipes/120/information?apiKey=8a69fc25f1ca4ccfa484d58fee68b86a"
+    # interpolated
+    # url = "https://api.spoonacular.com/recipes/#{@recipe_id}/information?apiKey=8a69fc25f1ca4ccfa484d58fee68b86a"
+    response = open(url).read
+    @recipes = JSON.parse(response)
+    # return the result of the spoonacular API
+    render json: { result: @recipe }
   end
 
   ### method to delete one recipe based on recipe id
