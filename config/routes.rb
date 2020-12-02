@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :api, defaults: {format: :json} do
     namespace :v1 do
       resources :foods, only: [:index, :create, :destroy]
+      get "/taglist", to: "foods#tags"
 
       resources :recipes, only: [:create, :show, :destroy]
       get "/users/:id/recipes", to: "recipes#my_recipes", as: 'my_recipes'
