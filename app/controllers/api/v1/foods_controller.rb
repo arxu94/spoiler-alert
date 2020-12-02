@@ -19,6 +19,13 @@ class Api::V1::FoodsController < ApplicationController
     render json: @foods
   end
 
+## this method will get all the tags that we have hardcoded
+# use .unique after .all if the tags are duplicated after being added to other foods
+  def tags
+    @tags = ActsAsTaggableOn::Tag.all
+    render json: @tags
+  end
+
   def destroy
     @food = Food.find(params[:id])
     @food.destroy
@@ -31,7 +38,8 @@ class Api::V1::FoodsController < ApplicationController
     render json: { error: @food.errors.full_messages }
   end
 
+# add tag list for categories
   def food_params
-    params.require(:food).permit(:user_id, :name, :status, :shelf_life, :photo, :purchase_date)
+    params.require(:food).permit(:user_id, :name, :status, :shelf_life, :photo, :purchase_date, :tag_list)
   end
 end
