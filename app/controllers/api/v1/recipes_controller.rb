@@ -26,13 +26,14 @@ require 'open-uri'
 
   ### method to mirror the recipes, same input for the route, make a request to the API spoonacular, wx request makes a get request to this route
   def recipe_results
+    # p "------------"
+    # p params[:search]
     @ingredients = params[:search]
-
     # interpolate the food name into the url link (don't forget the + sign in front)
     # hardcoded:
-    url = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=+flour,+sugar&number=5&apiKey=8a69fc25f1ca4ccfa484d58fee68b86a"
+    # url = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=+flour,+sugar&number=5&apiKey=8a69fc25f1ca4ccfa484d58fee68b86a"
     # interpolation:
-    # url = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=#{@ingredients}&number=5&apiKey=8a69fc25f1ca4ccfa484d58fee68b86a"
+    url = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=#{@ingredients}&number=5&apiKey=8a69fc25f1ca4ccfa484d58fee68b86a"
 
     response = open(url).read
     @recipes = JSON.parse(response)
