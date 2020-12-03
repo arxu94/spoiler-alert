@@ -14,8 +14,8 @@ class Api::V1::FoodsController < ApplicationController
     if params[:query].present?
       @food = Food.where("name ILIKE ?", "%#{params[:query]}%")
     else
-      ## add method to order by shelf life
-      @foods = Food.all.order(purchase_date: :asc)
+      ## add method to order by food expiring food
+      @foods = Food.all.order(expire_date: :asc)
     end
     render json: @foods
   end
