@@ -14,13 +14,14 @@ class Api::V1::FoodsController < ApplicationController
     if params[:query].present?
       @food = Food.where("name ILIKE ?", "%#{params[:query]}%")
     else
-      @foods = Food.all
+      ## add method to order by shelf life
+      @foods = Food.all.order(purchase_date: :asc)
     end
     render json: @foods
   end
 
-## this method will get all the tags that we have hardcoded
-# use .unique after .all if the tags are duplicated after being added to other foods
+  ## this method will get all the tags that we have hardcoded
+  ## use .unique after .all if the tags are duplicated after being added to other foods
   def tags
     @tags = ActsAsTaggableOn::Tag.all
     render json: @tags
