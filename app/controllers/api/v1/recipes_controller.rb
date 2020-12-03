@@ -28,7 +28,7 @@ require 'open-uri'
   def recipe_results
     # p "------------"
     # p params[:search]
-    @ingredients = params[:search]
+    @ingredients = params[:search].gsub(params[:search][-1],"")
     # interpolate the food name into the url link (don't forget the + sign in front)
     # hardcoded:
     # url = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=+flour,+sugar&number=5&apiKey=8a69fc25f1ca4ccfa484d58fee68b86a"
