@@ -2,6 +2,9 @@ class Api::V1::FoodsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create, :destroy]
 
   def create
+    p '----'
+    p food_params[:purchase_date]
+    food_params[:purchase_date] = Date.parse(food_params[:purchase_date])
     @food = Food.new(food_params)
     if @food.save
       render json: { food: @food, status: :success }
@@ -41,6 +44,6 @@ class Api::V1::FoodsController < ApplicationController
 
 # add tag list for categories
   def food_params
-    params.require(:food).permit(:user_id, :name, :status, :shelf_life, :photo, :purchase_date, :tag_list)
+    params.require(:food).permit(:user_id, :name, :status, :shelf_life, :photo, :purchase_date, :expire_date, :tag_list)
   end
 end
