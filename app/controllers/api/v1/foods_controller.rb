@@ -6,6 +6,9 @@ class Api::V1::FoodsController < ApplicationController
     p food_params[:purchase_date]
     food_params[:purchase_date] = Date.parse(food_params[:purchase_date])
     @food = Food.new(food_params)
+    p @food.errors
+    p @food.errors
+    p @food.errors
     if @food.save
       render json: { food: @food, status: :success }
     else
