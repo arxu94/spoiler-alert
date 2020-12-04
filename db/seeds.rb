@@ -18,18 +18,18 @@ user = User.create!(
 foodtags = Food.new(tag_list: ["Meat and Fish", "Dairy", "Fruits and Veggies", "Condiments", "Eggs", "Others"], user: user)
 foodtags.save!
 
-10.times do
-  user = User.create!(
-    nickname: Faker::Name.name,
-    open_id: rand(1..200)
-    )
+# 10.times do
+#   user = User.create!(
+#     nickname: Faker::Name.name,
+#     open_id: rand(1..200)
+#     )
 
-  food = Food.create!(
-  user: user,
-  name: Faker::Food.vegetables,
-  status: true,
-  shelf_life: rand(1..15),
-  photo: "https://source.unsplash.com/800x400/?groceries,meat,vegetables,fruits",
-  purchase_date: Faker::Date.backward(days: 10)
-    )
-end
+#   food = Food.create!(
+#   user: user,
+#   name: Faker::Food.vegetables,
+#   status: true,
+#   shelf_life: rand(1..15),
+#   photo: "https://source.unsplash.com/800x400/?groceries,meat,vegetables,fruits",
+#   purchase_date: Faker::Date.backward(days: 10)
+#     )
+# end
