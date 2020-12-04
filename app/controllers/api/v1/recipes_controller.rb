@@ -36,7 +36,7 @@ require 'open-uri'
     # url = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=#{@ingredients}&number=5&apiKey=8a69fc25f1ca4ccfa484d58fee68b86a"
 
     #alex's key
-    url = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=#{@ingredients}&number=5&apiKey=85aeca77d8134a13be3a459305815224"
+    url = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=#{@ingredients},&number=5&apiKey=85aeca77d8134a13be3a459305815224"
 
 
     response = open(url).read
@@ -57,7 +57,6 @@ require 'open-uri'
 
     #alex's key
     url = "https://api.spoonacular.com/recipes/#{@recipe_id}/information?apiKey=85aeca77d8134a13be3a459305815224"
-
 
     response = open(url).read
     @recipes = JSON.parse(response)
