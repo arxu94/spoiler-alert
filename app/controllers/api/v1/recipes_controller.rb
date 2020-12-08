@@ -78,7 +78,7 @@ require 'open-uri'
   end
 
   def recipe_params
-    params.require(:recipe).permit(:user_id, :title, :ingredient, :instructions)
+    params.require(:recipe).permit(:user_id, :title, :instructions, :ingredient, :image, :cooking_time)
   end
 
   def render_error
