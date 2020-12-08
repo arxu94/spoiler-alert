@@ -33,6 +33,24 @@ class Api::V1::FoodsController < ApplicationController
     render json: @tags
   end
 
+  # this method will find most tagged categories and give suggestions
+  def tips
+    @tag = ActsAsTaggableOn::Tag.most_used(1)
+    if @tag == "Meat and Fish"
+      message = "You have a lot of meat and fish, make sure you eat some veggies!"
+    elsif @tag == "Dairy"
+      message = "Your fridge is % dairy products, you sure do love your cheeses!"
+    elsif @tag == "Fruits and Veggies"
+      message = "You have a lot of fruits and veggies, keep it up!"
+    elsif @tag == "Condiments"
+      message = "You sure have a lot of sauces, make sure you put them to good use!"
+    elsif @tag == "Eggs"
+      message = "You have a lot of fruits and veggies, keep it up!"
+    end
+    @response = { most_used: @tag, message: message }
+    render json: @response
+  end
+
   def destroy
     @food = Food.find(params[:id])
     @food.destroy
