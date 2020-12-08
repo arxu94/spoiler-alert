@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :foods, only: [:index, :create, :destroy]
       get "/taglist", to: "foods#tags"
+      get "/tips/:user_id", to: "foods#tips"
 
       resources :recipes, only: [:create, :show, :destroy]
       get "/users/:id/recipes", to: "recipes#my_recipes", as: 'my_recipes'
