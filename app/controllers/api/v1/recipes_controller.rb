@@ -17,7 +17,8 @@ require 'open-uri'
 
   ### method to see all the recipes saved
   def my_recipes
-    @recipes = Recipe.where(user_id: params[:id])
+    @my_recipes = Recipe.where(user_id: params[:id])
+    render json: { recipes: @my_recipes, status: :success }
   end
 
   ### method to show one singular recipe when user clicks into it based on recipe id
