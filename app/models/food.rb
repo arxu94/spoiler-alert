@@ -3,7 +3,7 @@ class Food < ApplicationRecord
   acts_as_taggable_on :tags
 # add a callback method so that the shelf life is set based on the tag
   before_commit :set_expiring_date
-  # "Meat and Fish", "Dairy", "Fruits and Veggies", "Condiments", "Eggs", "Others"]
+  # "Meat", "Seafood", "Dairy", "Fruits", "Veggies", "Condiments", "Eggs", "Others"]
 
   # private
 
@@ -11,10 +11,14 @@ class Food < ApplicationRecord
     # p "-------------------"
     # p date = ((self.purchase_date+11) - Date.today).to_i
     # p "-------------------"
-    if self.tag_list == ["Fruits and Veggies"]
-      self.update!(expire_date: (self.purchase_date + 7))
-    elsif self.tag_list == ["Meat and Fish"]
+    if self.tag_list == ["Fruits"]
+      self.update!(expire_date: (self.purchase_date + 6))
+    elsif self.tag_list == ["Meat"]
       self.update!(expire_date: (self.purchase_date + 3))
+    elsif self.tag_list == ["Seafood"]
+      self.update!(expire_date: (self.purchase_date + 3))
+    elsif self.tag_list == ["Veggies"]
+      self.update!(expire_date: (self.purchase_date + 4))
     elsif self.tag_list == ["Dairy"]
       self.update!(expire_date: (self.purchase_date + 5))
     elsif self.tag_list == ["Condiments"]
