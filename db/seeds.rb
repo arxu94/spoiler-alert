@@ -8,7 +8,7 @@ require 'faker'
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Food.destroy_all
-User.destroy_all
+# User.destroy_all
 
 user = User.create!(
     nickname: Faker::Name.name,

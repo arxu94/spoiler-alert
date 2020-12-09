@@ -65,6 +65,7 @@ class LoginController < Api::V1::BaseController
       end
 
     end
+  end
 # =======
 #     tag_hashes = @user.foods.tag_counts
 #     sorted_tag_hashes = tag_hashes.sort_by { |tag| -tag.taggings_count }
