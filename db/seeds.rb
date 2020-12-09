@@ -8,14 +8,14 @@ require 'faker'
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Food.destroy_all
-User.destroy_all
+# User.destroy_all
 
 user = User.create!(
     nickname: Faker::Name.name,
     open_id: rand(1..200)
     )
 
-foodtags = Food.new(tag_list: ["Meat and Fish", "Dairy", "Fruits and Veggies", "Condiments", "Eggs", "Others"], user: user)
+foodtags = Food.new(tag_list: ["Meat", "Seafood", "Dairy", "Fruits", "Veggies", "Condiments", "Eggs", "Others"], user: user)
 foodtags.save!
 
 # 10.times do
