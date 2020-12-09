@@ -61,7 +61,8 @@ class LoginController < Api::V1::BaseController
 
         return { most_used: @tag, message: @message, sorted: sorted_tag_hashes }
       else
-        return { most_used: @tag, message: "no tips", sorted: sorted_tag_hashes }
+        @message = "Nothing in your fridge yet! Let's add some food."
+        return { most_used: @tag, message: @message, sorted: sorted_tag_hashes }
       end
 
     end
