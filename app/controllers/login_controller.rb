@@ -31,6 +31,10 @@ class LoginController < Api::V1::BaseController
     total = Food.where(user_id: @user_id).count
     # find specific tag total (for ex how many veggies)
     if total > 0
+      p "im inside has tips"
+      p "im inside has tips"
+      p "im inside has tips"
+      p "im inside has tips"
       tag_hashes = @user.foods.tag_counts
       sorted_tag_hashes = tag_hashes.sort_by { |tag| -tag.taggings_count }
       most_popular_tag = sorted_tag_hashes[0]
