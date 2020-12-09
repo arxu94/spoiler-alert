@@ -15,10 +15,20 @@ require 'open-uri'
     end
   end
 
-  ### method to see all the recipes saved
+  ### method to see all the recipes saved and search as well
   def my_recipes
-    @my_recipes = Recipe.where(user_id: params[:id])
-    render json: { recipes: @my_recipes, status: :success }
+    if params[:query].present?
+      @my_recipes = Recipe.where(user_id: params[:id])
+      # user_recipes = @my_recipes.where()
+      # @my_recipes = user_recipes.select("title ILIKE ?", "%#{params[:query]}%")
+      # @updated_res = @my_recipes
+      @result = @my_recipes.where("title ILIKE ?", "%#{params[:query]}%")
+      # Recipe.where(user_id: params["id"], title: params["title"])
+      render json: { recipes: @result, status: :hellospoileralert }
+    else
+      @my_recipes = Recipe.where(user_id: params[:id])
+      render json: { recipes: @my_recipes, status: :success }
+    end
   end
 
   ### method to show one singular recipe when user clicks into it based on recipe id
