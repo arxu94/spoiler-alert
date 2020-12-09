@@ -9,8 +9,8 @@ Rails.application.routes.draw do
       get "/tips/:user_id", to: "foods#tips"
 
       resources :recipes, only: [:create, :show, :destroy]
-      get "/users/:id/recipes", to: "recipes#my_recipes"
-      # get "/users/:id/recipes", to: "recipes#my_recipes", as: 'my_recipes'
+      # get "/users/:id/recipes", to: "recipes#my_recipes"
+      get "/users/:id/recipes", to: "recipes#my_recipes", as: 'my_recipes'
       get "/find_recipes", to: "recipes#recipe_results"
       get "/recipe_details", to: "recipes#recipe_details"
 
