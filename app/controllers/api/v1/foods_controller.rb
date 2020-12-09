@@ -46,11 +46,8 @@ class Api::V1::FoodsController < ApplicationController
     most_popular_tag = sorted_tag_hashes[0]
     top = most_popular_tag.taggings_count
     percentage = ((top.to_f / total.to_f)*100).round(1)
-    p percentage
 # access the name of the tag that is most used, not the entire object of the tag
     @tag = most_popular_tag.name
-    p @tag
-
     if @tag == "Meat and Fish"
       @message = "Your fridge is #{percentage}% meat and fish, make sure you eat some veggies!"
     elsif @tag == "Dairy"

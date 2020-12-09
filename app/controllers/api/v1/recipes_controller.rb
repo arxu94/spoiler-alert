@@ -23,6 +23,7 @@ require 'open-uri'
 
   ### method to show one singular recipe when user clicks into it based on recipe id
   def show
+    render json: @recipe
   end
 
   ### method to mirror the recipes, same input for the route, make a request to the API spoonacular, wx request makes a get request to this route
