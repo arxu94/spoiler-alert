@@ -63,4 +63,31 @@ class LoginController < Api::V1::BaseController
       end
 
     end
+# =======
+#     tag_hashes = @user.foods.tag_counts
+#     sorted_tag_hashes = tag_hashes.sort_by { |tag| -tag.taggings_count }
+#     most_popular_tag = sorted_tag_hashes[0]
+#     top = most_popular_tag.taggings_count
+#     percentage = ((top.to_f / total.to_f)*100).round(1)
+# # access the name of the tag that is most used, not the entire object of the tag
+#     @tag = most_popular_tag.name
+#     if @tag == "Meat"
+#       @message = "Your fridge is #{percentage}% meat, make sure you eat some veggies!"
+#     elsif @tag == "Seafood"
+#       @message = "Your fridge is #{percentage}% seafood, don't forget about veggies!"
+#     elsif @tag == "Dairy"
+#       @message = "Your fridge is #{percentage}% dairy products, you sure do love your cheeses!"
+#     elsif @tag == "Veggies"
+#       @message = "Your fridge is #{percentage}% veggies, keep it up!"
+#     elsif @tag == "Fruits"
+#       @message = "Your fridge is #{percentage}% fruits, be careful with sugar!"
+#     elsif @tag == "Condiments"
+#       @message = "You sure have a lot of sauces (#{percentage}% of your fridge!), make sure you put them to good use!"
+#     elsif @tag == "Eggs"
+#       @message = "Your fridge is #{percentage}% eggs, keep it up!"
+#     end
+
+#     @response = { most_used: @tag, message: @message, sorted: sorted_tag_hashes }
+#   end
+# >>>>>>> 01eed0e6aa6fd404369f373ad644a5c10f9f381a
 end
