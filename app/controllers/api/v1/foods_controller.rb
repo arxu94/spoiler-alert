@@ -48,12 +48,16 @@ class Api::V1::FoodsController < ApplicationController
     percentage = ((top.to_f / total.to_f)*100).round(1)
 # access the name of the tag that is most used, not the entire object of the tag
     @tag = most_popular_tag.name
-    if @tag == "Meat and Fish"
-      @message = "Your fridge is #{percentage}% meat and fish, make sure you eat some veggies!"
+    if @tag == "Meat"
+      @message = "Your fridge is #{percentage}% meat, make sure you eat some veggies!"
+    elsif @tag == "Seafood"
+      @message = "Your fridge is #{percentage}% seafood, don't forget about veggies!"
     elsif @tag == "Dairy"
       @message = "Your fridge is #{percentage}% dairy products, you sure do love your cheeses!"
-    elsif @tag == "Fruits and Veggies"
-      @message = "Your fridge is #{percentage}% fruits and veggies, keep it up!"
+    elsif @tag == "Veggies"
+      @message = "Your fridge is #{percentage}% veggies, keep it up!"
+    elsif @tag == "Fruits"
+      @message = "Your fridge is #{percentage}% fruits, be careful with sugar!"
     elsif @tag == "Condiments"
       @message = "You sure have a lot of sauces (#{percentage}% of your fridge!), make sure you put them to good use!"
     elsif @tag == "Eggs"
