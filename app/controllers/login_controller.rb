@@ -31,12 +31,12 @@ class LoginController < Api::V1::BaseController
     total = Food.where(user_id: @user_id).count
     # find specific tag total (for ex how many veggies)
     if total > 0
-      p "im inside has tips"
-      p "im inside has tips"
-      p "im inside has tips"
+      # p "im inside has tips"
+      # p "im inside has tips"
+      # p "im inside has tips"
 
 
-      p "im inside has tips"
+      # p "im inside has tips"
       tag_hashes = @user.foods.tag_counts
       sorted_tag_hashes = tag_hashes.sort_by { |tag| -tag.count }
       most_popular_tag = sorted_tag_hashes[0]
@@ -60,8 +60,9 @@ class LoginController < Api::V1::BaseController
           @message = "Your fridge is #{percentage}% eggs, that's eggcellent... Did the chicken or egg come first though?"
         elsif @tag == "Others"
           @message = "Your fridge is #{percentage}% full of surprises! Don't forget to eat your veggies!"
-        return { most_used: @tag, message: @message, sorted: sorted_tag_hashes }
         end
+      return { most_used: @tag, message: @message, sorted: sorted_tag_hashes }
+
     else
       @message = "Nothing in your fridge yet! Let's add some food."
       return { most_used: @tag, message: @message, sorted: sorted_tag_hashes }

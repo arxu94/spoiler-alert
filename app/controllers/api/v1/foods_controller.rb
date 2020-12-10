@@ -40,14 +40,11 @@ class Api::V1::FoodsController < ApplicationController
 
     ####################################################
     def tips
-
-    @user_id = params[:user_id]
-    @user = User.find(user_id: @user_id)
+    @user = User.find(params[:user_id])
 
     #find all foods created by this user (how many tags in total)
-    total = Food.where(user_id: @user_id).count
+    total = Food.where(user_id: @user.id).count
     # find specific tag total (for ex how many veggies)
-    p total
 
     if total > 0
       tag_hashes = @user.foods.tag_counts
@@ -73,11 +70,11 @@ class Api::V1::FoodsController < ApplicationController
           @message = "Your fridge is #{percentage}% eggs, that's eggcellent... Did the chicken or egg come first though?"
         elsif @tag == "Others"
           @message = "Your fridge is #{percentage}% full of surprises! Don't forget to eat your veggies!"
-        return { most_used: @tag, message: @message, sorted: sorted_tag_hashes }
         end
+        render json: { most_used: @tag, message: @message, sorted: sorted_tag_hashes }
     else
       @message = "Nothing in your fridge yet! Let's add some food."
-      return { most_used: @tag, message: @message, sorted: sorted_tag_hashes }
+      render json: { most_used: @tag, message: @message, sorted: sorted_tag_hashes }
     end
   end
 
