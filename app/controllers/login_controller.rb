@@ -38,9 +38,9 @@ class LoginController < Api::V1::BaseController
 
       p "im inside has tips"
       tag_hashes = @user.foods.tag_counts
-      sorted_tag_hashes = tag_hashes.sort_by { |tag| -tag.taggings_count }
+      sorted_tag_hashes = tag_hashes.sort_by { |tag| -tag.count }
       most_popular_tag = sorted_tag_hashes[0]
-      top = most_popular_tag.taggings_count
+      top = most_popular_tag.count
       percentage = ((top.to_f / total.to_f)*100).round(1)
   # access the name of the tag that is most used, not the entire object of the tag
         @tag = most_popular_tag.name
