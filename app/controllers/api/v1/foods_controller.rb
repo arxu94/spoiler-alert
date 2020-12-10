@@ -38,13 +38,17 @@ class Api::V1::FoodsController < ApplicationController
     render json: @tags
   end
 
-####################################################
+    ####################################################
     def tips
-    #pass in user's id
+
     @user_id = params[:user_id]
+    @user = User.find(user_id: @user_id)
+
     #find all foods created by this user (how many tags in total)
     total = Food.where(user_id: @user_id).count
     # find specific tag total (for ex how many veggies)
+    p total
+
     if total > 0
       tag_hashes = @user.foods.tag_counts
       sorted_tag_hashes = tag_hashes.sort_by { |tag| -tag.count }
