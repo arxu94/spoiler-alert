@@ -47,18 +47,19 @@ class LoginController < Api::V1::BaseController
         if @tag == "Meat"
           @message = "Your fridge is #{percentage}% meat, make sure you eat some veggies!"
         elsif @tag == "Seafood"
-          @message = "Your fridge is #{percentage}% seafood, don't forget about veggies!"
+          @message = "Your fridge is #{percentage}% seafood, don't forget about veggies! And don't forget to just keep swimming just keep swimming..."
         elsif @tag == "Dairy"
-          @message = "Your fridge is #{percentage}% dairy products, you sure do love your cheeses!"
+          @message = "Your fridge is #{percentage}% dairy products, sweet baby cheesus, you sure do love your cheeses!"
         elsif @tag == "Veggies"
           @message = "Your fridge is #{percentage}% veggies, keep it up!"
         elsif @tag == "Fruits"
           @message = "Your fridge is #{percentage}% fruits, be careful with sugar!"
         elsif @tag == "Condiments"
-          @message = "You sure have a lot of sauces (#{percentage}% of your fridge!), make sure you put them to good use!"
+          @message = "You sure have a lot of sauces (#{percentage}% of your fridge!), make sure you put them to good use. Pregooooo."
         elsif @tag == "Eggs"
-          @message = "Your fridge is #{percentage}% eggs, keep it up!"
-
+          @message = "Your fridge is #{percentage}% eggs, that's eggcellent... Did the chicken or egg come first though?"
+        elsif @tag == "Others"
+          @message = "Your fridge is #{percentage}% full of surprises! Don't forget to eat your veggies!"
         return { most_used: @tag, message: @message, sorted: sorted_tag_hashes }
         end
     else
