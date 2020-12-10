@@ -5,7 +5,9 @@ class Api::V1::FoodsController < ApplicationController
     p '----'
     p food_params[:purchase_date]
     food_params[:purchase_date] = Date.parse(food_params[:purchase_date])
-    food_params[:expire_date] = Date.parse(food_params[:expire_date])
+    if params[:expire_date].present?
+      food_params[:expire_date] = Date.parse(food_params[:expire_date])
+    end
     @food = Food.new(food_params)
     p @food.errors
     p @food.errors
