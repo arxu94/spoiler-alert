@@ -20,7 +20,8 @@ class Api::V1::FoodsController < ApplicationController
   end
 
   def index
-    @foods = Food.where(user: User.find(params[:user_id]))
+      # @foods = Food.where(user_id: params[:id])
+    @foods = Food.where(user_id: User.find(params[:user_id]))
       @foods = Food.all.order(expire_date: :asc)
     # if params[:query].present?
     #   @foods = @foods.where("name ILIKE ?", "%#{params[:query]}%")
