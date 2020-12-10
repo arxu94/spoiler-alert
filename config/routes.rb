@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :foods, only: [:index, :create, :destroy]
       get "/taglist", to: "foods#tags"
-      get "/tips/:user_id", to: "foods#tips"
+      # get "/tips/:user_id", to: "login#tips"
 
       resources :recipes, only: [:create, :show, :destroy]
 
@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   end
 
   post '/login', to: 'login#login'
+  get "/tips/:user_id", to: "login#tips"
 end
