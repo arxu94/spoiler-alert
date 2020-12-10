@@ -5,6 +5,7 @@ class Api::V1::FoodsController < ApplicationController
     p '----'
     p food_params[:purchase_date]
     food_params[:purchase_date] = Date.parse(food_params[:purchase_date])
+    food_params[:expire_date] = Date.parse(food_params[:expire_date])
     @food = Food.new(food_params)
     p @food.errors
     p @food.errors
@@ -17,13 +18,14 @@ class Api::V1::FoodsController < ApplicationController
   end
 
   def index
-    if params[:query].present?
-      @food = Food.where("name ILIKE ?", "%#{params[:query]}%")
-    else
-      ## add method to order by food expiring food
+    @foods = Food.where(user: User.find(params[:user_id]))
       @foods = Food.all.order(expire_date: :asc)
-    end
-    render json: @foods
+    # if params[:query].present?
+    #   @foods = @foods.where("name ILIKE ?", "%#{params[:query]}%")
+      render json: @foods
+    # else
+      ## add method to order by food expiring food
+      # render json: @foods
   end
 
   ## this method will get all the tags that we have hardcoded
