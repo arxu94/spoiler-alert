@@ -38,39 +38,43 @@ class Api::V1::FoodsController < ApplicationController
     render json: @tags
   end
 
-  # this method will find most tagged categories and give suggestions
-  def tips
+####################################################
+    def tips
     #pass in user's id
     @user_id = params[:user_id]
     #find all foods created by this user (how many tags in total)
     total = Food.where(user_id: @user_id).count
-    @user = User.find(@user_id)
     # find specific tag total (for ex how many veggies)
-    tag_hashes = @user.foods.tag_counts
-    sorted_tag_hashes = tag_hashes.sort_by { |tag| -tag.taggings_count }
-    most_popular_tag = sorted_tag_hashes[0]
-    top = most_popular_tag.taggings_count
-    percentage = ((top.to_f / total.to_f)*100).round(1)
-# access the name of the tag that is most used, not the entire object of the tag
-    @tag = most_popular_tag.name
-    if @tag == "Meat"
-      @message = "Your fridge is #{percentage}% meat, make sure you eat some veggies!"
-    elsif @tag == "Seafood"
-      @message = "Your fridge is #{percentage}% seafood, don't forget about veggies!"
-    elsif @tag == "Dairy"
-      @message = "Your fridge is #{percentage}% dairy products, you sure do love your cheeses!"
-    elsif @tag == "Veggies"
-      @message = "Your fridge is #{percentage}% veggies, keep it up!"
-    elsif @tag == "Fruits"
-      @message = "Your fridge is #{percentage}% fruits, be careful with sugar!"
-    elsif @tag == "Condiments"
-      @message = "You sure have a lot of sauces (#{percentage}% of your fridge!), make sure you put them to good use!"
-    elsif @tag == "Eggs"
-      @message = "Your fridge is #{percentage}% eggs, keep it up!"
+    if total > 0
+      tag_hashes = @user.foods.tag_counts
+      sorted_tag_hashes = tag_hashes.sort_by { |tag| -tag.count }
+      most_popular_tag = sorted_tag_hashes[0]
+      top = most_popular_tag.count
+      percentage = ((top.to_f / total.to_f)*100).round(1)
+  # access the name of the tag that is most used, not the entire object of the tag
+        @tag = most_popular_tag.name
+        if @tag == "Meat"
+          @message = "Your fridge is #{percentage}% meat, make sure you eat some veggies!"
+        elsif @tag == "Seafood"
+          @message = "Your fridge is #{percentage}% seafood, don't forget about veggies! And don't forget to just keep swimming just keep swimming..."
+        elsif @tag == "Dairy"
+          @message = "Your fridge is #{percentage}% dairy products, sweet baby cheesus, you sure do love your cheeses!"
+        elsif @tag == "Veggies"
+          @message = "Your fridge is #{percentage}% veggies, keep it up!"
+        elsif @tag == "Fruits"
+          @message = "Your fridge is #{percentage}% fruits, be careful with sugar!"
+        elsif @tag == "Condiments"
+          @message = "You sure have a lot of sauces (#{percentage}% of your fridge!), make sure you put them to good use. Pregooooo."
+        elsif @tag == "Eggs"
+          @message = "Your fridge is #{percentage}% eggs, that's eggcellent... Did the chicken or egg come first though?"
+        elsif @tag == "Others"
+          @message = "Your fridge is #{percentage}% full of surprises! Don't forget to eat your veggies!"
+        return { most_used: @tag, message: @message, sorted: sorted_tag_hashes }
+        end
+    else
+      @message = "Nothing in your fridge yet! Let's add some food."
+      return { most_used: @tag, message: @message, sorted: sorted_tag_hashes }
     end
-
-    @response = { most_used: @tag, message: @message, sorted: sorted_tag_hashes }
-    render json: @response
   end
 
   def destroy
