@@ -22,7 +22,7 @@ class Api::V1::FoodsController < ApplicationController
     p "testing"
     p checking_res
     p checking_res
-    if checking_res == 0
+    if checking_res["errcode"] == 0
       p @food.errors
       p @food.errors
       p @food.errors
