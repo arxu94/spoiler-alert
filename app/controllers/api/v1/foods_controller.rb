@@ -9,13 +9,18 @@ class Api::V1::FoodsController < ApplicationController
       food_params[:expire_date] = Date.parse(food_params[:expire_date])
     end
     @food = Food.new(food_params)
-    p @food.errors
-    p @food.errors
-    p @food.errors
-    if @food.save
-      render json: { food: @food, status: :success }
+    checking_res = content_check(@food.name)
+    if checking_res == 0
+      p @food.errors
+      p @food.errors
+      p @food.errors
+      if @food.save
+        render json: { food: @food, status: :success }
+      else
+        render_error
+      end
     else
-      render_error
+     render json: {error: "content not ok"}
     end
   end
 
