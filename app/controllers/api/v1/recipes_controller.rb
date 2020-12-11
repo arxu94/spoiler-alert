@@ -46,14 +46,18 @@ require 'open-uri'
     # hardcoded:
     # url = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=+flour,+sugar&number=5&apiKey=8a69fc25f1ca4ccfa484d58fee68b86a"
     # ariel's key
-    # url = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=#{@ingredients}&number=5&apiKey=8a69fc25f1ca4ccfa484d58fee68b86a"
+    url = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=#{@ingredients}&number=5&apiKey=8a69fc25f1ca4ccfa484d58fee68b86a"
 
     #alex's key
-    url = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=#{@ingredients}&number=5&apiKey=85aeca77d8134a13be3a459305815224"
+    # url = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=#{@ingredients}&number=5&apiKey=85aeca77d8134a13be3a459305815224"
 
 
     response = open(url).read
     @recipes = JSON.parse(response)
+
+    # @recipes.map!{|r|
+    #   r['instructions'] = r['instructions']
+    # }
     # return the result of the spoonacular API
     render json: { result: @recipes }
   end
@@ -66,15 +70,17 @@ require 'open-uri'
     # interpolated
 
     #ariel's key
-    # url = "https://api.spoonacular.com/recipes/#{@recipe_id}/information?apiKey=8a69fc25f1ca4ccfa484d58fee68b86a"
+    url = "https://api.spoonacular.com/recipes/#{@recipe_id}/information?apiKey=8a69fc25f1ca4ccfa484d58fee68b86a"
 
     #alex's key
-    url = "https://api.spoonacular.com/recipes/#{@recipe_id}/information?apiKey=85aeca77d8134a13be3a459305815224"
+    # url = "https://api.spoonacular.com/recipes/#{@recipe_id}/information?apiKey=85aeca77d8134a13be3a459305815224"
 
     response = open(url).read
-    @recipes = JSON.parse(response)
+    @recipe = JSON.parse(response)
     # return the result of the spoonacular API
-    render json: { result: @recipes }
+
+
+    # render json: { result: @recipe }
   end
 
   ### method to delete one recipe based on recipe id
