@@ -9,7 +9,19 @@ class Api::V1::FoodsController < ApplicationController
       food_params[:expire_date] = Date.parse(food_params[:expire_date])
     end
     @food = Food.new(food_params)
+    p @food.errors
+    p @food.errors
+    p @food.errors
+    p @food.errors
+    p @food.errors
+    p @food.errors
     checking_res = content_check(@food.name)
+    p checking_res
+    p checking_res
+    p checking_res
+    p "testing"
+    p checking_res
+    p checking_res
     if checking_res == 0
       p @food.errors
       p @food.errors
