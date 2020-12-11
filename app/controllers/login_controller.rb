@@ -45,26 +45,26 @@ class LoginController < Api::V1::BaseController
   # access the name of the tag that is most used, not the entire object of the tag
         @tag = most_popular_tag.name
         if @tag == "Meat"
-          @message = "Your fridge is #{percentage}% meat, make sure you eat some veggies!"
+          @message = "Your fridge is mostly meat (#{percentage}% of your fridge), make sure you eat some veggies."
         elsif @tag == "Seafood"
-          @message = "Your fridge is #{percentage}% seafood, don't forget about veggies! And don't forget to just keep swimming just keep swimming..."
+          @message = "Your fridge is mostly seafood (#{percentage}% of your fridge), don't forget about veggies! And don't forget to just keep swimming just keep swimming..."
         elsif @tag == "Dairy"
-          @message = "Your fridge is #{percentage}% dairy products, sweet baby cheesus, you sure do love your cheeses!"
+          @message = "Your fridge is mostly dairy products (#{percentage}% of your fridge), sweet baby cheesus, you sure do love your cheeses."
         elsif @tag == "Veggies"
-          @message = "Your fridge is #{percentage}% veggies, keep it up!"
+          @message = "Your fridge is mostly veggies (#{percentage}% of your fridge), keep it up."
         elsif @tag == "Fruits"
-          @message = "Your fridge is #{percentage}% fruits, be careful with sugar!"
+          @message = "Your fridge is mostly fruit (#{percentage}% of your fridge), be careful with your sugar intake."
         elsif @tag == "Condiments"
           @message = "You sure have a lot of sauces (#{percentage}% of your fridge!), make sure you put them to good use. Pregooooo."
         elsif @tag == "Eggs"
-          @message = "Your fridge is #{percentage}% eggs, that's eggcellent... Did the chicken or egg come first though?"
+          @message = "Your fridge is mostly eggs (#{percentage}% of your fridge), that's eggcellent... Did the chicken or egg come first though?"
         elsif @tag == "Others"
-          @message = "Your fridge is #{percentage}% full of surprises! Don't forget to eat your veggies!"
+          @message = "Your fridge is #{percentage}% full of surprises! Don't forget to eat your veggies."
         end
       return { most_used: @tag, message: @message, sorted: sorted_tag_hashes }
 
     else
-      @message = "Nothing in your fridge yet! Let's add some food."
+      @message = "Nothing in your fridge yet, let's add some food."
       return { most_used: @tag, message: @message, sorted: sorted_tag_hashes }
     end
   end
